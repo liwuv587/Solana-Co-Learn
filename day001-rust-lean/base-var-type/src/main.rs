@@ -132,7 +132,7 @@ fn main() {
     let person_tuple = ("Rust", 13, true);
 
     let ptr = &person_tuple;
-    println!("{}", ptr.0);
+    println!("{}", ptr.0); // Rust
 
     let mut arr = ["Rust", "Go", "C++"];
 
