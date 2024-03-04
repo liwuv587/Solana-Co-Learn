@@ -42,6 +42,7 @@ fn main() {
 
     println!("char_size={}", char_size);
 
+    // #########################################
     // 复合类型
     // Rust 中的复合类型主要有元组和数组
 
@@ -70,7 +71,10 @@ fn main() {
     arr1[0] = 100;
     println!("{:?}", arr1); // [100, 0, 0, 0, 0]
 
+    // #########################################
     // 1.3.3 进阶数据类型
+
+    // #########################################
     // 字符串
     // Rust 中的字符串比较复杂，有多种形式，适用于不同的场景。核心是需要掌握 &str 和 String
 
@@ -116,6 +120,7 @@ fn main() {
     println!("slice1: {}", slice1); // Hello
     println!("slice2: {}", slice2); // Rust
 
+    // #########################################
     // 引用
     // Rust 中的引用类型是一等公民，并且和借用指同一个概念。从可变性上可以分为可变引用和不可变引用
 
@@ -140,5 +145,62 @@ fn main() {
 
     arr_ptr[2] = "Java"; // Change C++ To Java
 
-    println!("{:?}", arr_ptr) // ["Rust", "Go", "Java"]
+    println!("{:?}", arr_ptr); // ["Rust", "Go", "Java"]
+
+    // #########################################
+    // 集合
+    // 两个重要的集合 Vec 和 HashMap，这里的集合指的是它们都聚集了多个同类型的元素
+
+    // 1 Vec
+    // Vec是动态大小，相比起数组来说，它更加常用
+    // Vec中的元素必须相同
+    // 需要注意的是，如果没有指定类型，那么 vec 需要通过上下文去推测，所以必须在接下来的代码总使用，否则会提示
+    // an explicit type, where the type for type parameter `T` is specified
+
+    // let mut vec1 = Vec::<String>::new();
+    let mut vec1 = Vec::new();
+    let mut vec2 = vec![];
+    // let mut vec1_1 = Vec::<String>::new();
+    // let mut v3c2_1: Vec<String> = vec![];
+
+    // vec 支持一系列的操作
+
+    // 添加元素
+    vec1.push("Rust");
+    vec2.push("Go");
+
+    // 当作栈
+    vec1.pop();
+
+    // 修改数据
+    vec2[0] = "Rust";
+
+    // Vec 和 String一样，数据存放在堆上
+
+    println!("{}", vec2.len()); // 1
+    println!("{}", vec2.capacity()); // 4
+    println!("{:?}", vec2.as_ptr()); // 0x7fafc9f05b70
+    println!("{}", vec2[0]);
+
+    // let mut vec3 = vec![];
+    // vec3.push("ve3");
+
+    // 2 HashMap
+
+    // HashMap并不是预导入的，需要手动引入当前作用域
+    use std::collections::HashMap;
+
+    // 使用new方法创建
+    let mut scores = HashMap::new();
+
+    // 插入数据
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    // 修改数据,修改和插入数据是同一个api
+    scores.insert(String::from("Blue"), 100);
+
+    // 访问数据,注意访问的key传递的是引用
+    let key = String::from("Blue");
+    println!("{:?}", scores[&key])
 }

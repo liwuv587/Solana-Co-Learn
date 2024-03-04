@@ -30,3 +30,9 @@ Solana 共学记录，学习原始资料参考一下资料栏目
 - CodeLLDB
 - Even Better TOML
 - crates
+- rust-analyzer：它会实时编译和分析你的 Rust 代码，提示代码中的错误，并对类型进行标注。你也可以使用官方的 rust 插件取代。
+- rust syntax：为代码提供语法高亮。
+- crates：帮助你分析当前项目的依赖是否是最新的版本。
+- better toml：Rust 使用 toml 做项目的配置管理。
+- better toml 可以帮你语法高亮，并展示 toml 文件中的错误。
+- rust test lens：可以帮你快速运行某个 Rust 测试。
