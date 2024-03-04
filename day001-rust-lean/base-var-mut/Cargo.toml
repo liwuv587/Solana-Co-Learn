@@ -1,6 +1,5 @@
-workspace = { members = ["base-var-mut"] }
 [package]
-name = "hello_cargo"
+name = "base-var-mut"
 version = "0.1.0"
 edition = "2021"
 
