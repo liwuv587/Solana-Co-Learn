@@ -194,7 +194,8 @@ fn main() {
     let mut scores = HashMap::new();
 
     // 插入数据
-    scores.insert(String::from("Blue"), 10);
+    scores.insert("Blue".to_string(), 10);
+    scores.insert("Blue".into(), 10);
     scores.insert(String::from("Yellow"), 50);
 
     // 修改数据,修改和插入数据是同一个api
