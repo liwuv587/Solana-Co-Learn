@@ -32,7 +32,7 @@ fn main() {
     // 4 可变性
     // 通过 mut 声明变量
     let mut language = "php";
-    let mut language = "go"; // 这里也应用到了 变量遮蔽 
+    let mut language = "go"; // 这里也应用到了 变量遮蔽
     language = "rust";
 
     println!("{}", language);
@@ -40,4 +40,6 @@ fn main() {
     // 5 变量遮蔽
     let language = 32;
     println!("{}", language);
+
+   
 }

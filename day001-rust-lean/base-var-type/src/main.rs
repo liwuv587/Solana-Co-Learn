@@ -203,5 +203,241 @@ fn main() {
 
     // 访问数据,注意访问的key传递的是引用
     let key = String::from("Blue");
-    println!("{:?}", scores[&key])
+    println!("{:?}", scores[&key]);
+
+    // 1 结构体
+    // Rust中的结构体有三种
+
+    // 1.1 常规结构体
+    struct Language {
+        name: String,
+        birth: u32,
+        is_popular: bool,
+    }
+
+    // 1.2 元组结构体
+    struct Rust(String);
+
+    // 1.3 单元结构体
+    struct Go;
+
+    // 2 为结构体实现方法
+    impl Rust {
+        // Self 代表结构体本身
+        fn new() -> Self {
+            Rust(String::from("Rust"))
+        }
+
+        fn print(&self) {
+            println!("{:?}", self.0);
+        }
+    }
+
+    // 3 方法调用
+    let r = Rust::new();
+
+    r.print();
+
+    Rust::print(&r);
+    Rust::print(&r);
+
+    // 4 访问结构体成员
+    println!("{:?}", r.0);
+
+    //枚举
+
+    // 枚举在形式上和结构体较为相似
+    enum Subject {
+        Math,
+        Chinese,
+        English(String),
+    }
+
+    // 初始化
+
+    let subject = Subject::English(String::from("English"));
+
+    //标准库中两个比较重要的枚举 Option和 Result
+
+    // Result 用于一些处操作可能遇到错误的场景，比如打开文件时，如果成功，返回文件，遇到错误时返回一个Error
+    use std::fs::File;
+
+    let file: Result<File, std::io::Error> = File::open("tmp.txt");
+
+    // Option 用于一些值可能为空的情况
+    // 如尝试获取哈希表中某个key所对应的value，当值存在时，返回值，当不存在时返回None
+
+    let map: HashMap<&str, u32> = HashMap::new();
+    let v: Option<&u32> = map.get("rust");
+
+    // 函数
+
+    // 1 函数定义
+    // 1.1 没有参数和返回值的函数
+    fn foo() {
+        println!("foo")
+    }
+
+    // 1.2 有参数和返回值的函数
+
+    fn bar(s: &str) -> String {
+        String::from(s)
+    }
+
+    // 1.3 参数类型必须显式声明，比如引用或者可变性
+
+    fn foobar(mut s: &str) -> &str {
+        s = "rust";
+        s
+    }
+
+    // 2 函数调用
+
+    foo();
+    bar("Rust");
+    let fr = foobar("go");
+    println!("{}", fr);
+
+    // 3 函数作为参数
+
+    fn af(f: fn() -> u32) -> u32 {
+        let value = f();
+
+        value
+    }
+
+    fn bf() -> u32 {
+        42
+    }
+
+    // 把函数作为参传给另一个函数
+
+    af(bf);
+
+    // 闭包
+    // 1 闭包定义
+
+    // 闭包可以捕获环境变量,并且根据其对环境变量的操作可以分为以下三类
+
+    let c1 = || println!("未捕获环境变量");
+
+    let v = "rust";
+    let c2 = || println!("捕获环境变量但不修改 {}", v);
+
+    let mut s0 = String::from("hello");
+
+    // 闭包的参数写在 ｜｜ 中
+
+    let mut c3 = |s: String| {
+        s0 = s + v;
+        println!("捕获并修改环境变量 {:?}", s0)
+    };
+
+    // 2 闭包的调用
+
+    // 闭包的调用同函数一样
+
+    c1();
+    c2();
+    c3(String::from("rust"));
+
+    // 1 泛型参数的表示
+
+    // 泛型参数一般用大写字母`T`表示,多个泛型参数可以使用多个大写字母
+
+    // 学习泛型时可以把泛型当作自定义类型，它必须先声明才能使用
+
+    // 2 泛型如何使用
+
+    // 2.1 集合 Vec<T>
+    // 集合vector就是由泛型提供支持的,它允许我们使用某个具体类型时再指定
+
+    let v1: Vec<u8> = Vec::new();
+    let v2: Vec<String> = Vec::new();
+    let v3: Vec<bool> = Vec::new();
+
+    // 2.2 泛型结构体
+
+    // 可以声明一个泛型结构体，然后再使用的时候在指定成员的具体类型
+    // 注意：必须先在` <> `中声明泛型参数，然后才能使用
+
+    struct Type<T>(T);
+    struct Point<A, B> {
+        a: A,
+        b: B,
+    }
+
+    let t1 = Type(42);
+    let t2 = Type("rust");
+
+    let p1 = Point { a: 42, b: 42 };
+    let p2 = Point { a: 42.1, b: 42.1 };
+
+    // 为泛型结构体实现方法
+    // 注意：为泛型结构体实现方法时，impl和结构体后面的泛型声明要保持一致
+    impl<A, B> Point<A, B> {
+        fn new(a: A, b: B) -> Self {
+            Point { a, b }
+        }
+    }
+
+    // 2.3 泛型枚举
+
+    // 同样，可以定义泛型枚举
+
+    enum Area<A, B, C> {
+        Rectangle(A),
+        Square(B),
+        Circle(C),
+    }
+
+    let a1: Area<f64, u32, &str> = Area::Rectangle(42f64);
+    let a2: Area<f32, u64, &str> = Area::Square(42u64);
+    let a3: Area<f64, u32, &str> = Area::Circle("100 cm^2");
+
+    // 2.4 泛型函数
+
+    // 函数参数也可以是泛型, 当然泛型也需要在 `<>` 中先声明
+
+    fn generics<T, B>(a: T, b: B) -> T {
+        a
+    }
+    generics(32, "rust");
+    generics("rust", 32);
+
+    // Rust 中的模式匹配指的是结构上的匹配，最常用有 match、while let 、let 、if let
+
+    // 1 match
+    // match 是最长用的模式匹配，主要和枚举搭配使用，以匹配不同的枚举成员
+
+    match std::fs::File::open("rust.txtr") {
+        Ok(file) => println!("{:?}", file),
+        Err(err) => println!("{}", err),
+    }
+
+    // 2 if let
+    // if let 可以让我们只关注我们想要的结果
+
+    if let Ok(file) = std::fs::File::open("rust.txtr") {
+        println!("{:?}", file);
+    }
+
+    // 3 while let
+    // 和 if let 类似，只处理正确的结果
+
+    while let Ok(file) = std::fs::File::open("rust.txt") {
+        println!("{:?}", file);
+    }
+
+    // 4 let
+    // let 本身也是一种模式匹配
+    // 使用 let 匹配元组中的元素
+
+    let tuple = (42, true, "rust");
+
+    let (x, y, z) = tuple;
+
+    println!("{:?}", x);
+    println!("{:?}", y);
+    println!("{:?}", z);
 }
