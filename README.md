@@ -36,3 +36,7 @@ Solana 共学记录，学习原始资料参考一下资料栏目
 - better toml：Rust 使用 toml 做项目的配置管理。
 - better toml 可以帮你语法高亮，并展示 toml 文件中的错误。
 - rust test lens：可以帮你快速运行某个 Rust 测试。
+
+
+
+export https_proxy=http://192.168.31.95:7890 http_proxy=http://192.168.31.95:7890 all_proxy=socks5://192.168.31.95:7890
