@@ -8,6 +8,13 @@ sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y pkg-confi
 cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
 
 
+
+echo "PATH=$PATH:/home/codespace/.cargo/bin"  >>~/.profile
+echo "PATH=$PATH:/home/codespace/.cargo/bin"  >>~/.zshrc
+
+
+
 avm install latest
 avm use latest
+
 ```
