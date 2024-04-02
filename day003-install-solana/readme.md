@@ -6,3 +6,7 @@
 ## explorer
 
 https://explorer.solana.com/?cluster=custom
+
+
+## anchor
+https://www.anchor-lang.com/release-notes/0.29.0
