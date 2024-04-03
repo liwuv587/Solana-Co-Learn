@@ -1,3 +1,6 @@
 {
-    "image":"liwuv587/anchor:0.29.0"
+    "image":"liwuv587/anchor:0.29.0",
+    "features":{
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1":{},
+    }
 }
